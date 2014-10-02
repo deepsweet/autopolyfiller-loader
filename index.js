@@ -28,6 +28,7 @@ module.exports = function(source, sourceMap) {
 
         // support existing SourceMap
         // https://github.com/webpack/imports-loader/blob/master/index.js#L34-L44
+        // https://github.com/mozilla/source-map#sourcenode
         if (sourceMap) {
             var currentRequest = loaderUtils.getCurrentRequest(this);
             var SourceNode = SourceMap.SourceNode;
