@@ -16,7 +16,7 @@ module.exports = function(source, sourceMap) {
     }
 
     if (polyfills.length) {
-        var inject = '/* injects from autopolyfiller-loader */\n';
+        var inject = '\n/* injects from autopolyfiller-loader */\n';
 
         // append require()s with absoluted paths to neccessary polyfills
         polyfills.forEach(function(polyfill) {
