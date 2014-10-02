@@ -4,7 +4,8 @@
   "description": "Autopolyfiller loader for webpack",
   "keywords": [
     "webpack",
-    "loader"
+    "loader",
+    "autopolyfiller"
   ],
   "homepage": "https://github.com/deepsweet/autopolyfiller-loader",
   "repository": {
@@ -26,8 +27,8 @@
     "polyfill": "git://github.com/jonathantneal/polyfill.git"
   },
   "devDependencies": {
-    "eslint": "",
-    "jscs": ""
+    "eslint": "^0.8.2",
+    "jscs": "^1.6.2"
   },
   "scripts": {
     "test": "eslint index.js && jscs index.js"
