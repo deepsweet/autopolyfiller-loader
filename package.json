@@ -1,0 +1,39 @@
+{
+  "name": "autopolyfiller-loader",
+  "version": "0.1.0",
+  "description": "Autopolyfiller loader for webpack",
+  "keywords": [
+    "webpack",
+    "loader"
+  ],
+  "homepage": "https://github.com/deepsweet/autopolyfiller-loader",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/deepsweet/autopolyfiller-loader.git"
+  },
+  "author": {
+    "name": "Kir Belevich",
+    "email": "kir@soulshine.in",
+    "url": "https://github.com/deepsweet"
+  },
+  "main": "index.js",
+  "peerDependencies": {
+    "webpack": "^1.4.3",
+    "loader-utils": "^0.2.4"
+  },
+  "dependencies": {
+    "autopolyfiller": "^1.3.0",
+    "polyfill": "git://github.com/jonathantneal/polyfill.git"
+  },
+  "devDependencies": {
+    "eslint": "",
+    "jscs": ""
+  },
+  "scripts": {
+    "test": "eslint index.js && jscs index.js"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "WTFPL"
+}
