@@ -20,7 +20,7 @@ npm i -S autopolyfiller-loader
 postLoaders: [ {
     test: /\.js$/,
     exclude: /\/(node_modules|bower_components)\//,
-    loader: 'autopolyfiller'
+    loader: 'autopolyfiller?{browsers:["last 2 versions", "ie >= 9"]}'
 } ]
 ```
 
