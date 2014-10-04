@@ -11,17 +11,19 @@
 ### Install
 
 ```sh
-npm i -S autopolyfiller-loader
+$ npm i -S autopolyfiller-loader
 ```
 
 ### Usage
 
 ```javascript
-postLoaders: [ {
-    test: /\.js$/,
-    exclude: /\/(node_modules|bower_components)\//,
-    loader: 'autopolyfiller?{browsers:["last 2 versions", "ie >= 9"]}'
-} ]
+module: {
+    postLoaders: [ {
+        test: /\.js$/,
+        exclude: /\/(node_modules|bower_components)\//,
+        loader: 'autopolyfiller?{ browsers: [ "last 2 versions", "ie >= 9" ] }'
+    } ]
+}
 ```
 
 [Documentation: Using loaders](https://webpack.github.io/docs/using-loaders.html).
