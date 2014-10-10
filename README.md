@@ -4,7 +4,7 @@
 [![npm](http://img.shields.io/npm/v/autopolyfiller-loader.svg?style=flat-square)](https://www.npmjs.org/package/autopolyfiller-loader)
 [![deps](http://img.shields.io/david/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://david-dm.org/deepsweet/autopolyfiller-loader)
 [![peer deps](http://img.shields.io/david/peer/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://david-dm.org/deepsweet/autopolyfiller-loader#info=peerDependencies)
-![unicorn approved](http://img.shields.io/badge/unicorn-approved-ff69b4.svg?style=flat-square)
+[![gratipay](http://img.shields.io/gratipay/deepsweet.svg?style=flat-square)](https://gratipay.com/deepsweet/)
 
 > This is like [Autoprefixer](https://github.com/ai/autoprefixer), but for JavaScript polyfills. It scans your code and applies only required polyfills.
 
