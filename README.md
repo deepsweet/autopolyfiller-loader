@@ -1,9 +1,9 @@
 ## [Autopolyfiller](https://github.com/azproduction/autopolyfiller) loader for [webpack](https://webpack.github.io/)
 
-[![travis](http://img.shields.io/travis/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://travis-ci.org/deepsweet/autopolyfiller-loader)
 [![npm](http://img.shields.io/npm/v/autopolyfiller-loader.svg?style=flat-square)](https://www.npmjs.org/package/autopolyfiller-loader)
+[![travis](http://img.shields.io/travis/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://travis-ci.org/deepsweet/autopolyfiller-loader)
+[![climate](http://img.shields.io/codeclimate/github/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://codeclimate.com/github/deepsweet/autopolyfiller-loader/code)
 [![deps](http://img.shields.io/david/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://david-dm.org/deepsweet/autopolyfiller-loader)
-[![peer deps](http://img.shields.io/david/peer/deepsweet/autopolyfiller-loader.svg?style=flat-square)](https://david-dm.org/deepsweet/autopolyfiller-loader#info=peerDependencies)
 [![gratipay](http://img.shields.io/gratipay/deepsweet.svg?style=flat-square)](https://gratipay.com/deepsweet/)
 
 > This is like [Autoprefixer](https://github.com/ai/autoprefixer), but for JavaScript polyfills. It scans your code and applies only required polyfills.
