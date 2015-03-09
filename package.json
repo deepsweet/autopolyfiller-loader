@@ -24,8 +24,8 @@
     "source-map": "^0.1.39"
   },
   "dependencies": {
-    "autopolyfiller": "^1.3.0",
-    "polyfill": "git://github.com/jonathantneal/polyfill.git"
+    "autopolyfiller": "^1.6.0",
+    "polyfill-service": "1.3.0"
   },
   "devDependencies": {
     "eslint": "^0.8.2",
