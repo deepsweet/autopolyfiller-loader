@@ -18,6 +18,7 @@
     "url": "https://github.com/deepsweet"
   },
   "main": "index.js",
+  "files": ["index.js"],
   "peerDependencies": {
     "webpack": "^1.4.3",
     "loader-utils": "^0.2.4",
