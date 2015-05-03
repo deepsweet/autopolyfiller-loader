@@ -20,13 +20,13 @@
   "main": "index.js",
   "files": ["index.js"],
   "peerDependencies": {
-    "webpack": "^1.4.3",
-    "loader-utils": "^0.2.4",
-    "source-map": "^0.1.39"
+    "webpack": "^1.4.3"
   },
   "dependencies": {
     "autopolyfiller": "^1.6.0",
-    "polyfill-service": "1.3.0"
+    "loader-utils": "^0.2.4",
+    "polyfill-service": "1.3.0",
+    "source-map": "^0.1.39"
   },
   "devDependencies": {
     "eslint": "^0.8.2",
