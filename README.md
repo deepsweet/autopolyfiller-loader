@@ -16,12 +16,13 @@ $ npm i -S autopolyfiller-loader
 
 ### Usage
 
-```javascript
+```js
 module: {
     postLoaders: [ {
         test: /\.js$/,
         exclude: /\/(node_modules|bower_components)\//,
-        loader: 'autopolyfiller?{ browsers: [ "last 2 versions", "ie >= 9" ] }'
+        loader: 'autopolyfiller',
+        query: { browsers: [ 'last 2 versions', 'ie >= 9' ] }
     } ]
 }
 ```
