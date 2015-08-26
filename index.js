@@ -9,7 +9,7 @@ module.exports = function(source, sourceMap) {
     // array of browsers
     var browsers = query.browsers || [];
     // array of polyfills names
-    var polyfills = autopolyfiller.apply(autopolyfiller, browsers).add(source).polyfills;
+    var polyfills = autopolyfiller(browsers).add(source).polyfills;
 
     if (this.cacheable) {
         this.cacheable();
