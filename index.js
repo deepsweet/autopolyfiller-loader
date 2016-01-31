@@ -20,6 +20,7 @@ module.exports = function(source, sourceMap) {
 
         // append require()s with absoluted paths to neccessary polyfills
         polyfills.forEach(function(polyfill) {
+            polyfill = polyfill.replace("Window.prototype.", "")
             inject += 'require(' + JSON.stringify(require.resolve('polyfill-service/polyfills/' + polyfill + '/polyfill')) + ');';
             inject += '\n';
         });
