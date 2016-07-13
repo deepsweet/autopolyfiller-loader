@@ -22,7 +22,43 @@ module: {
         test: /\.js$/,
         exclude: /\/(node_modules|bower_components)\//,
         loader: 'autopolyfiller',
-        query: { browsers: [ 'last 2 versions', 'ie >= 9' ] }
+        query: {
+          browsers: [ 'last 2 versions', 'ie >= 9' ], //list of browsers to polyfill
+          withParser: ['acorn@0.11.0', {ecmaVersion: 6}], //allow use custom parser
+          exclude: ['Promise'], //exclude some polyfills
+          include: ['Object.create'], //force include some polifills
+          use: [{
+                    // AST tree pattern matching
+                    // It may "grep" multiply polyfills
+                    test: function (ast) {
+                        return query('Object.newFeature(_$)', ast).length > 0 ? ['Object.newFeature'] : [];
+                    },
+
+                    // Your polyfills code
+                    polyfill: {
+                        'Object.newFeature': 'Object.newFeature = function () {};'
+                    },
+
+                    // This list means "apply this feature to the <list of browsers>"
+                    // For more examples see https://github.com/jonathantneal/polyfill/blob/master/agent.js.json
+                    support: {
+                        // For chrome 29 only apply Object.newFeature polyfill
+                        'Chrome': [{
+                            only: '29',
+                            fill: 'Object.newFeature'
+                        }]
+                    },
+
+                    // This is optional. By default autopolyfiller will use
+                    // polyfill's name to generate condition's code:
+                    wrapper: {
+                        'Object.newFeature': {
+                            'before': 'if (!("newFeature" in Object)) {',
+                            'after': '}'
+                        }
+                    }
+                }] //add custom polyfills
+        }
     } ]
 }
 ```
