@@ -8,8 +8,26 @@ module.exports = function(source, sourceMap) {
     var query = loaderUtils.parseQuery(this.query);
     // array of browsers
     var browsers = query.browsers || [];
+    // array of excluded polyfills
+    var exclude = query.exclude || [];
+    // array of included polyfills
+    var include = query.include || [];
+    // use custom parser
+    var customParse = query.withParser || [];
+    // use custom polyfills
+    var uses = query.use || [];
+
     // array of polyfills names
-    var polyfills = autopolyfiller(browsers).add(source).polyfills;
+    var prePolyfills = autopolyfiller(browsers);
+    var polyfills;
+    if (customParse.length) {
+        prePolyfills = prePolyfills.withParser.apply(prePolyfills, customParse);
+    }
+    uses.forEach(function(use) {
+        prePolyfills.use(use);
+    });
+
+    polyfills = prePolyfills.exclude(exclude).include(include).add(source).polyfills;
 
     if (this.cacheable) {
         this.cacheable();
