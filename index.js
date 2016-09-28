@@ -38,7 +38,7 @@ module.exports = function(source, sourceMap) {
 
         // append require()s with absoluted paths to neccessary polyfills
         polyfills.forEach(function(polyfill) {
-            polyfill = polyfill.replace(/^Window\.prototype\./, "");
+            polyfill = polyfill.replace(/^Window\.prototype\./, '');
             inject += 'require(' + JSON.stringify(require.resolve('polyfill-service/polyfills/' + polyfill + '/polyfill')) + ');';
             inject += '\n';
         });
@@ -62,8 +62,7 @@ module.exports = function(source, sourceMap) {
                 file: currentRequest
             });
 
-            this.callback(null, result.code, result.map.toJSON());
-            return;
+            return void this.callback(null, result.code, result.map.toJSON());
         }
 
         // prepend collected inject at the top of file
@@ -72,8 +71,7 @@ module.exports = function(source, sourceMap) {
 
     // return the original source and sourceMap
     if (sourceMap) {
-        this.callback(null, source, sourceMap);
-        return;
+        return void this.callback(null, source, sourceMap);
     }
 
     // return the original source
