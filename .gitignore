@@ -3,3 +3,4 @@ tmp/
 *.sublime-*
 *.log
 .DS_Store
+.idea/
