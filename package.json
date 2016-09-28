@@ -1,6 +1,6 @@
 {
   "name": "autopolyfiller-loader",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Autopolyfiller loader for webpack",
   "keywords": [
     "webpack",
@@ -18,7 +18,9 @@
     "url": "https://github.com/deepsweet"
   },
   "main": "index.js",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "peerDependencies": {
     "webpack": "^1.4.3"
   },
