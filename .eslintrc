@@ -11,12 +11,12 @@
     no-cond-assign: 1
     no-console: 1
     no-constant-condition: 2
-    no-comma-dangle: 1
+    comma-dangle: 1
     no-control-regex: 1
     no-debugger: 2
     no-dupe-keys: 2
     no-empty: 2
-    no-empty-class: 2
+    no-empty-character-class: 2
     no-ex-assign: 2
     no-extra-boolean-cast: 1
     no-extra-parens: 1
@@ -46,7 +46,6 @@
     no-caller: 2
     no-div-regex: 0
     no-else-return: 1
-    no-empty-label: 2
     no-eq-null: 2
     no-eval: 2
     no-extend-native: 2
@@ -82,7 +81,6 @@
     # strict mode
     # Definition for rule 'global-strict' was not found
     # global-strict: [2, "always"]
-    no-extra-strict: 2
     strict: 2
 
     # variables
@@ -133,8 +131,8 @@
     space-in-brackets: 0
     space-in-parens: 0
     space-infix-ops: 0
-    space-return-throw-case: 1
-    space-unary-word-ops: 1
+    keyword-spacing: 1
+    space-unary-ops: 1
     max-nested-callbacks: 0
     one-var: 0
     wrap-regex: 0
