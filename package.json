@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "eslint": "^3.6.1",
-    "jscs": "^1.6.2"
+    "jscs": "^3.0.7"
   },
   "scripts": {
     "test": "eslint index.js && jscs index.js"
