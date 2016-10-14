@@ -1,6 +1,6 @@
 {
   "name": "autopolyfiller-loader",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "description": "Autopolyfiller loader for webpack",
   "keywords": [
     "webpack",
