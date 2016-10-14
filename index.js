@@ -62,8 +62,7 @@ module.exports = function(source, sourceMap) {
                 file: currentRequest
             });
 
-            this.callback(null, result.code, result.map.toJSON());
-            return;
+            return void this.callback(null, result.code, result.map.toJSON());
         }
 
         // prepend collected inject at the top of file
@@ -72,8 +71,7 @@ module.exports = function(source, sourceMap) {
 
     // return the original source and sourceMap
     if (sourceMap) {
-        this.callback(null, source, sourceMap);
-        return;
+        return void this.callback(null, source, sourceMap);
     }
 
     // return the original source
