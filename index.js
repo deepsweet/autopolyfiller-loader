@@ -4,6 +4,17 @@ var loaderUtils = require('loader-utils');
 var autopolyfiller = require('autopolyfiller');
 var SourceMap = require('source-map');
 
+var getPolyfillPath = function(polyfill) {
+    polyfill = polyfill
+        .replace(/^Window\.prototype\./, '')
+        .replace(/^base64$/, 'atob'); // fix #15
+    if (!/^document\..+/.test(polyfill)) {
+        polyfill = polyfill.replace(/\./g, '/');
+    }
+
+    return require.resolve('polyfill-service/polyfills/' + polyfill + '/polyfill');
+};
+
 module.exports = function(source, sourceMap) {
     var query = loaderUtils.parseQuery(this.query);
     // array of browsers
@@ -38,8 +49,7 @@ module.exports = function(source, sourceMap) {
 
         // append require()s with absoluted paths to neccessary polyfills
         polyfills.forEach(function(polyfill) {
-            polyfill = polyfill.replace(/^Window\.prototype\./, '');
-            inject += 'require(' + JSON.stringify(require.resolve('polyfill-service/polyfills/' + polyfill + '/polyfill')) + ');';
+            inject += 'require(' + JSON.stringify(getPolyfillPath(polyfill)) + ');';
             inject += '\n';
         });
 
