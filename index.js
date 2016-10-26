@@ -3,6 +3,8 @@
 var loaderUtils = require('loader-utils');
 var autopolyfiller = require('autopolyfiller');
 var SourceMap = require('source-map');
+var fs = require('fs');
+var loadedDetects = {};
 
 var getPolyfillPath = function(polyfill) {
     polyfill = polyfill
@@ -13,6 +15,25 @@ var getPolyfillPath = function(polyfill) {
     }
 
     return require.resolve('polyfill-service/polyfills/' + polyfill + '/polyfill');
+};
+
+var getPolyfillDetectPath = function(polyfill) {
+    polyfill = polyfill
+        .replace(/^Window\.prototype\./, '')
+        .replace(/^base64$/, 'atob'); // fix #15
+    if (!/^document\..+/.test(polyfill)) {
+        polyfill = polyfill.replace(/\./g, '/');
+    }
+
+    return require.resolve('polyfill-service/polyfills/' + polyfill + '/detect');
+};
+
+var getPolyfillDetect = function(polyfill) {
+    if (!loadedDetects[polyfill]) {
+        var path = getPolyfillDetectPath(polyfill);
+        loadedDetects[polyfill] = fs.readFileSync(path, { encoding: 'utf8' });
+    }
+    return loadedDetects[polyfill];
 };
 
 module.exports = function(source, sourceMap) {
@@ -49,7 +70,9 @@ module.exports = function(source, sourceMap) {
 
         // append require()s with absoluted paths to neccessary polyfills
         polyfills.forEach(function(polyfill) {
-            inject += 'require(' + JSON.stringify(getPolyfillPath(polyfill)) + ');';
+            var path = getPolyfillPath(polyfill);
+            var test = getPolyfillDetect(polyfill);
+            inject += 'if (!(' + test + ')) require(' + JSON.stringify(path) + ');';
             inject += '\n';
         });
 
