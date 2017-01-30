@@ -6,6 +6,22 @@ var SourceMap = require('source-map');
 var fs = require('fs');
 var loadedDetects = {};
 
+var formatMessage = function(name, message) {
+    return (name ? name + ': ' : '') + message + '\n';
+};
+
+var AutopolyfillerLoaderError = function(name, message,  error) {
+    Error.call(this);
+    Error.captureStackTrace(this, AutopolyfillerLoaderError);
+
+    this.name = 'AutopolyfillerLoaderError';
+    this.message = formatMessage(name, message);
+    this.error = error;
+};
+
+AutopolyfillerLoaderError.prototype = Object.create(Error.prototype);
+AutopolyfillerLoaderError.prototype.constructor = AutopolyfillerLoaderError;
+
 var getPolyfillPath = function(polyfill) {
     polyfill = polyfill
         .replace(/^Window\.prototype\./, '')
@@ -37,46 +53,61 @@ var getPolyfillDetect = function(polyfill) {
 };
 
 module.exports = function(source, sourceMap) {
-    var query = loaderUtils.parseQuery(this.query);
-    // array of browsers
-    var browsers = query.browsers || [];
-    // array of excluded polyfills
-    var exclude = query.exclude || [];
-    // array of included polyfills
-    var include = query.include || [];
-    // use custom parser
-    var customParse = query.withParser || [];
-    // use custom polyfills
-    var uses = query.use || [];
-
-    // array of polyfills names
-    var prePolyfills = autopolyfiller(browsers);
     var polyfills;
-    if (customParse.length) {
-        prePolyfills = prePolyfills.withParser.apply(prePolyfills, customParse);
+
+    try {
+        var query = loaderUtils.parseQuery(this.query);
+        // array of browsers
+        var browsers = query.browsers || [];
+        // array of excluded polyfills
+        var exclude = query.exclude || [];
+        // array of included polyfills
+        var include = query.include || [];
+        // use custom parser
+        var customParse = query.withParser || [
+                require('acorn'),
+                query.parserOptions || {}
+            ];
+        // use custom polyfills
+        var uses = query.use || [];
+
+        // array of polyfills names
+        var prePolyfills = autopolyfiller(browsers);
+
+        if (customParse.length) {
+            prePolyfills = prePolyfills.withParser.apply(prePolyfills, customParse);
+        }
+        uses.forEach(function(use) {
+            prePolyfills.use(use);
+        });
+
+        polyfills = prePolyfills.exclude(exclude).include(include).add(source).polyfills;
+
+        if (this.cacheable) {
+            this.cacheable();
+        }
+
     }
-    uses.forEach(function(use) {
-        prePolyfills.use(use);
-    });
-
-    polyfills = prePolyfills.exclude(exclude).include(include).add(source).polyfills;
-
-    if (this.cacheable) {
-        this.cacheable();
+    catch (err) {
+        throw new AutopolyfillerLoaderError(err.name, 'Can\'t get polyfills list (' + err.message + ')', err);
     }
-
     if (polyfills.length) {
         var inject = '\n/* injects from autopolyfiller-loader */\n';
 
-        // append require()s with absoluted paths to neccessary polyfills
-        polyfills.forEach(function(polyfill) {
-            var path = getPolyfillPath(polyfill);
-            var test = getPolyfillDetect(polyfill);
-            inject += 'if (!(' + test + ')) require(' + JSON.stringify(path) + ');';
-            inject += '\n';
-        });
+        try {
+            // append require()s with absoluted paths to neccessary polyfills
+            polyfills.forEach(function(polyfill) {
+                var path = getPolyfillPath(polyfill);
+                var test = getPolyfillDetect(polyfill);
+                inject += 'if (!(' + test + ')) require(' + JSON.stringify(path) + ');';
+                inject += '\n';
+            });
 
-        inject += '\n';
+            inject += '\n';
+        }
+        catch (err) {
+            throw new AutopolyfillerLoaderError(err.name, 'Can\'t get polyfill\'s source (' + err.message + ')', err);
+        }
 
         // support existing SourceMap
         // https://github.com/mozilla/source-map#sourcenode

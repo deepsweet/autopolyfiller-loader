@@ -25,6 +25,8 @@ module: {
         query: {
           browsers: [ 'last 2 versions', 'ie >= 9' ], //list of browsers to polyfill
           withParser: ['acorn@0.11.0', {ecmaVersion: 6}], //allow use custom parser
+          parserOptions: {ecmaVersion: 6}, // only if no #withParser specified,
+                                           // allow to use custom options with acorn v4 parser 
           exclude: ['Promise'], //exclude some polyfills
           include: ['Object.create'], //force include some polifills
           use: [{

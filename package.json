@@ -22,7 +22,8 @@
     "index.js"
   ],
   "peerDependencies": {
-    "webpack": "^1.4.3"
+    "acorn": "4.x.x",
+    "webpack": "^1.4.3 || ^2.2.x"
   },
   "dependencies": {
     "autopolyfiller": "^1.6.0",
