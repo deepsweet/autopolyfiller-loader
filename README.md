@@ -18,10 +18,11 @@ $ npm i -S autopolyfiller-loader
 
 ```js
 module: {
-    postLoaders: [ {
+    rules: [ {
+        enforce: 'post',
         test: /\.js$/,
         exclude: /\/(node_modules|bower_components)\//,
-        loader: 'autopolyfiller',
+        loader: 'autopolyfiller-loader',
         query: {
           browsers: [ 'last 2 versions', 'ie >= 9' ], //list of browsers to polyfill
           withParser: ['acorn@0.11.0', {ecmaVersion: 6}], //allow use custom parser
